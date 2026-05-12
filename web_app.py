@@ -9,11 +9,28 @@ from docxtpl import DocxTemplate
 from PyPDF2 import PdfMerger
 import io
 
-# ================= CONFIG =================
+# ================= CONFIG & FONT SETUP =================
 if os.name == 'nt': # If running on Windows
     LIBRE_OFFICE = r"C:\Program Files\LibreOffice\program\soffice.exe"
-else: # If running on Google Cloud (Linux)
+else: # If running on Streamlit Cloud (Linux)
     LIBRE_OFFICE = "soffice" 
+    
+    # --- FONT REGISTRATION ---
+    try:
+        # Standard Linux font paths
+        font_paths = [os.path.expanduser("~/.local/share/fonts"), os.path.expanduser("~/.fonts")]
+        source_font = "Amsterdam Personal Use.ttf" # Matches your filename
+        
+        if os.path.exists(source_font):
+            for fpath in font_paths:
+                if not os.path.exists(fpath):
+                    os.makedirs(fpath)
+                shutil.copy(source_font, os.path.join(fpath, source_font))
+            
+            # Rebuild font cache so LibreOffice can see it
+            subprocess.run(["fc-cache", "-f", "-v"], check=True)
+    except Exception as e:
+        print(f"Font setup warning: {e}")
 
 st.set_page_config(page_title="Certificate Generator Pro", layout="wide")
 
@@ -45,6 +62,7 @@ if uploaded_excel and uploaded_template:
         selected_data = df.iloc[start_row-2 : end_row-1]
     
     else:
+        # Assuming place is in the 3rd column (index 2)
         places = df.iloc[:, 2].dropna().unique()
         target_place = st.selectbox("Select Place", places)
         selected_data = df[df.iloc[:, 2].astype(str).str.strip() == target_place]
@@ -61,27 +79,15 @@ if uploaded_excel and uploaded_template:
             if os.path.exists(temp_dir): shutil.rmtree(temp_dir)
             os.makedirs(temp_dir)
 
-            # --- FONT REGISTRATION (CRITICAL FOR AMSTERDAM FONT) ---
-            if os.name != 'nt': # Only run on Linux (Streamlit Cloud)
-                try:
-                    font_dir = os.path.expanduser("~/.local/share/fonts")
-                    if not os.path.exists(font_dir):
-                        os.makedirs(font_dir)
-                    if os.path.exists("Amsterdam.ttf"):
-                        shutil.copy("Amsterdam.ttf", os.path.join(font_dir, "Amsterdam.ttf"))
-                        subprocess.run(["fc-cache", "-f", "-v"], check=True)
-                except Exception as e:
-                    st.warning(f"Note: Font registration skipped or failed: {e}")
-
             docx_files = []
             
             # 1. Generate DOCX
             for i, (idx, row) in enumerate(selected_data.iterrows()):
                 excel_row_num = idx + 2
                 
-                # Column Map based on your column indexes
+                # Column Map
                 cert_id = str(row.iloc[0])
-                name = str(row.iloc[1]).strip() # Pulls the full name
+                name = str(row.iloc[1]).strip() 
                 place_val = str(row.iloc[2])
                 raw_date = row.iloc[4]
                 
@@ -103,14 +109,15 @@ if uploaded_excel and uploaded_template:
                 status_text.text(f"Generating Word Files: {i+1}/{len(selected_data)}")
 
             # 2. Convert to PDF (LibreOffice)
-            status_text.text("Converting to PDF... (This requires LibreOffice installed)")
+            status_text.text("Converting to PDF... (Using LibreOffice)")
             try:
-                # Passing all files at once to LibreOffice
+                # Convert all DOCX to PDF
                 subprocess.run([LIBRE_OFFICE, "--headless", "--convert-to", "pdf", "--outdir", temp_dir] + docx_files, check=True)
                 
                 # 3. Merge PDFs
                 merger = PdfMerger()
-                pdf_files = [f.replace(".docx", ".pdf") for f in docx_files]
+                # Create list of expected PDF paths
+                pdf_files = [os.path.join(temp_dir, f"{os.path.splitext(os.path.basename(doc))[0]}.pdf") for doc in docx_files]
                 
                 for pdf in pdf_files:
                     if os.path.exists(pdf):
@@ -135,4 +142,4 @@ if uploaded_excel and uploaded_template:
                     
             except Exception as e:
                 st.error(f"Error during PDF conversion: {e}")
-                st.info("Ensure Amsterdam.ttf is in your GitHub repo and packages.txt has 'libreoffice'.")
+                st.info("Ensure 'Amsterdam Personal Use.ttf' is in your GitHub repo and packages.txt has 'libreoffice' and 'fontconfig'.")
