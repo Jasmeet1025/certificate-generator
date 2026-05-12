@@ -10,9 +10,6 @@ from PyPDF2 import PdfMerger
 import io
 
 # ================= CONFIG =================
-# On Linux (Google Cloud), the command is usually just 'soffice'
-# For local Windows testing, you might still need the full path
-# Updated logic for both Windows and Google Cloud
 if os.name == 'nt': # If running on Windows
     LIBRE_OFFICE = r"C:\Program Files\LibreOffice\program\soffice.exe"
 else: # If running on Google Cloud (Linux)
@@ -45,7 +42,6 @@ if uploaded_excel and uploaded_template:
         c1, c2 = st.columns(2)
         start_row = c1.number_input("Start Row", min_value=2, max_value=len(df)+1, value=2)
         end_row = c2.number_input("End Row", min_value=2, max_value=len(df)+1, value=len(df)+1)
-        # Slicing (Excel Row 2 is index 0)
         selected_data = df.iloc[start_row-2 : end_row-1]
     
     else:
@@ -65,15 +61,27 @@ if uploaded_excel and uploaded_template:
             if os.path.exists(temp_dir): shutil.rmtree(temp_dir)
             os.makedirs(temp_dir)
 
+            # --- FONT REGISTRATION (CRITICAL FOR AMSTERDAM FONT) ---
+            if os.name != 'nt': # Only run on Linux (Streamlit Cloud)
+                try:
+                    font_dir = os.path.expanduser("~/.local/share/fonts")
+                    if not os.path.exists(font_dir):
+                        os.makedirs(font_dir)
+                    if os.path.exists("Amsterdam.ttf"):
+                        shutil.copy("Amsterdam.ttf", os.path.join(font_dir, "Amsterdam.ttf"))
+                        subprocess.run(["fc-cache", "-f", "-v"], check=True)
+                except Exception as e:
+                    st.warning(f"Note: Font registration skipped or failed: {e}")
+
             docx_files = []
             
             # 1. Generate DOCX
             for i, (idx, row) in enumerate(selected_data.iterrows()):
                 excel_row_num = idx + 2
                 
-                # Column Map: A=ID, B=Name, C=Place, E=Date
+                # Column Map based on your column indexes
                 cert_id = str(row.iloc[0])
-                name = str(row.iloc[1])
+                name = str(row.iloc[1]).strip() # Pulls the full name
                 place_val = str(row.iloc[2])
                 raw_date = row.iloc[4]
                 
@@ -127,4 +135,4 @@ if uploaded_excel and uploaded_template:
                     
             except Exception as e:
                 st.error(f"Error during PDF conversion: {e}")
-                st.info("Note: Ensure LibreOffice is installed and added to your System PATH.")
+                st.info("Ensure Amsterdam.ttf is in your GitHub repo and packages.txt has 'libreoffice'.")
