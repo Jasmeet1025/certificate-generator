@@ -8,46 +8,34 @@ from datetime import datetime
 from docxtpl import DocxTemplate
 from PyPDF2 import PdfMerger
 
-# ================= 1. THE FONT SURGERY (CRITICAL) =================
-def force_install_fonts():
+# ================= 1. SILENT FONT SETUP =================
+def initialize_fonts():
+    """Runs silently in the background to ensure Amsterdam font is available."""
     if os.name != 'nt':
-        # Paths where Linux/LibreOffice look for fonts
-        target_dirs = [
-            os.path.expanduser("~/.fonts"),
-            os.path.expanduser("~/.local/share/fonts"),
-            "/home/appuser/.fonts" # Streamlit specific path
-        ]
-        
-        # Exact name of your file in GitHub
-        source_font = "amsterdam.ttf" 
-        
+        font_dir = os.path.expanduser("~/.local/share/fonts")
+        source_font = "amsterdam.ttf"
         if os.path.exists(source_font):
-            for d in target_dirs:
-                if not os.path.exists(d):
-                    os.makedirs(d)
-                shutil.copy(source_font, os.path.join(d, "amsterdam.ttf"))
-            
-            # Rebuild cache
-            subprocess.run(["fc-cache", "-f", "-v"], check=True)
-            return "Font copied to all target dirs."
-        return "amsterdam.ttf NOT FOUND in root!"
+            if not os.path.exists(font_dir):
+                os.makedirs(font_dir)
+            shutil.copy(source_font, os.path.join(font_dir, source_font))
+            subprocess.run(["fc-cache", "-f"], check=False)
 
-font_status = force_install_fonts()
+initialize_fonts()
 
 # ================= 2. CONFIG =================
-if os.name == 'nt':
-    LIBRE_OFFICE = r"C:\Program Files\LibreOffice\program\soffice.exe"
-else:
-    LIBRE_OFFICE = "soffice"
+LIBRE_OFFICE = r"C:\Program Files\LibreOffice\program\soffice.exe" if os.name == 'nt' else "soffice"
 
 st.set_page_config(page_title="Certificate Generator Pro", layout="wide")
 
 # ================= 3. UI =================
 st.title("📜 Certificate Generator Pro")
-st.sidebar.write(f"**Font Setup Status:** {font_status}")
+st.markdown("---")
 
-uploaded_excel = st.file_uploader("1. Upload Data Excel Sheet", type=["xlsx"])
-uploaded_template = st.file_uploader("2. Upload Word Template", type=["docx"])
+col1, col2 = st.columns(2)
+with col1:
+    uploaded_excel = st.file_uploader("1. Upload Data Excel Sheet", type=["xlsx"])
+with col2:
+    uploaded_template = st.file_uploader("2. Upload Word Template", type=["docx"])
 
 if uploaded_excel and uploaded_template:
     df = pd.read_excel(uploaded_excel)
@@ -70,6 +58,7 @@ if uploaded_excel and uploaded_template:
         if selected_data.empty:
             st.error("No data selected!")
         else:
+            # Fixed Progress Bar Logic
             progress_bar = st.progress(0)
             status_text = st.empty()
             
@@ -78,8 +67,9 @@ if uploaded_excel and uploaded_template:
             os.makedirs(temp_dir)
 
             docx_files = []
+            total_rows = len(selected_data)
             
-            # 1. Generate DOCX
+            # --- PHASE 1: WORD GENERATION (0% to 50%) ---
             for i, (idx, row) in enumerate(selected_data.iterrows()):
                 excel_row_num = idx + 2
                 cert_id, name, place_val = str(row.iloc[0]), str(row.iloc[1]).strip(), str(row.iloc[2])
@@ -95,19 +85,20 @@ if uploaded_excel and uploaded_template:
                 doc.save(fpath)
                 docx_files.append(fpath)
                 
-                progress_bar.progress((i + 1) / (len(selected_data) * 2))
-                status_text.text(f"Word Files: {i+1}/{len(selected_data)}")
+                # Progress goes from 0 to 0.5
+                progress_bar.progress(int(((i + 1) / total_rows) * 50))
+                status_text.text(f"Creating Word Documents: {i+1}/{total_rows}")
 
-            # 2. Convert to PDF
-            status_text.text("Converting to PDF...")
+            # --- PHASE 2: PDF CONVERSION (50% to 90%) ---
+            status_text.text("Converting all files to PDF... Please wait.")
+            progress_bar.progress(60) 
+            
             try:
-                # We add the environment variable here just in case
-                my_env = os.environ.copy()
-                # Run LibreOffice
-                subprocess.run([LIBRE_OFFICE, "--headless", "--convert-to", "pdf", "--outdir", temp_dir] + docx_files, 
-                               check=True, env=my_env)
+                subprocess.run([LIBRE_OFFICE, "--headless", "--convert-to", "pdf", "--outdir", temp_dir] + docx_files, check=True)
+                progress_bar.progress(85)
                 
-                # 3. Merge
+                # --- PHASE 3: MERGING (90% to 100%) ---
+                status_text.text("Merging into final PDF...")
                 merger = PdfMerger()
                 for doc_path in docx_files:
                     pdf_path = doc_path.replace(".docx", ".pdf")
@@ -118,9 +109,15 @@ if uploaded_excel and uploaded_template:
                 merger.write(output_pdf)
                 merger.close()
                 
-                st.success("Success!")
+                progress_bar.progress(100)
+                status_text.success("Generation Complete!")
+                
                 with open(output_pdf, "rb") as f:
-                    st.download_button("⬇️ Download Merged PDF", f, "Certificates.pdf", "application/pdf")
-                    
+                    st.download_button(
+                        label="⬇️ Download Merged PDF",
+                        data=f,
+                        file_name="Certificates_Bundle.pdf",
+                        mime="application/pdf"
+                    )
             except Exception as e:
-                st.error(f"PDF Error: {e}")
+                st.error(f"Error during PDF processing: {e}")
