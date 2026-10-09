@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-09T00:00:00Z",
+  "title": "Design System: ThinkHealth Certificates",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "neutral", "displayName": "Cab Ink", "canonical": "oklch(23.9% 0.035 159.3)", "tonalRamp": ["#000f06", "#14291e", "#304639", "#4d6457", "#6f8779", "#93ac9d", "#b8d2c3", "#dcf6e6"] },
+      "ink-2": { "role": "neutral", "displayName": "Ink Two", "canonical": "oklch(37.7% 0.031 160.4)", "tonalRamp": ["#010f07", "#16291f", "#31453a", "#4e6358", "#70867a", "#94ab9e", "#bad1c4", "#ddf5e7"] },
+      "muted": { "role": "neutral", "displayName": "Muted Sage", "canonical": "oklch(50.2% 0.029 159.8)", "tonalRamp": ["#020f07", "#17281f", "#33453a", "#506358", "#72867a", "#96aa9e", "#bbd1c4", "#dff5e8"] },
+      "ground": { "role": "neutral", "displayName": "White Body", "canonical": "#ffffff", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca", "#eeeeee"] },
+      "surface": { "role": "neutral", "displayName": "White Body (panels)", "canonical": "#ffffff", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca", "#eeeeee"] },
+      "wash": { "role": "neutral", "displayName": "Wash", "canonical": "oklch(95.9% 0.007 151.9)", "tonalRamp": ["#090c0a", "#212522", "#3d413e", "#5b5f5b", "#7d817e", "#a1a6a2", "#c7ccc8", "#ebf0ec"] },
+      "line": { "role": "neutral", "displayName": "Hairline", "canonical": "oklch(88.5% 0.015 148.8)", "tonalRamp": ["#070d08", "#1f2620", "#3b423c", "#586059", "#7b837b", "#9fa7a0", "#c4cdc5", "#e8f1e9"] },
+      "line-2": { "role": "neutral", "displayName": "Hairline Strong", "canonical": "oklch(81.4% 0.020 152.7)", "tonalRamp": ["#050e07", "#1d271f", "#38433b", "#566158", "#78847b", "#9ca89f", "#c1cec4", "#e5f3e8"] },
+      "green": { "role": "primary", "displayName": "Rescue Green", "canonical": "oklch(50.9% 0.129 152.5)", "tonalRamp": ["#001600", "#003300", "#005118", "#007137", "#359659", "#5ebc7c", "#85e3a1", "#a9ffc4"] },
+      "green-deep": { "role": "primary", "displayName": "Deep Livery Green", "canonical": "oklch(41.1% 0.103 152.8)", "tonalRamp": ["#001500", "#003106", "#004e23", "#246e40", "#4b9262", "#70b786", "#96deab", "#b9ffce"] },
+      "green-soft": { "role": "primary", "displayName": "Green Mist", "canonical": "oklch(94.5% 0.020 154.9)", "tonalRamp": ["#050e08", "#1c2720", "#38433b", "#556159", "#77847b", "#9ba89f", "#c1cfc5", "#e5f3e9"] },
+      "yellow": { "role": "secondary", "displayName": "Hi-Vis Yellow", "canonical": "oklch(87.7% 0.174 92.5)", "tonalRamp": ["#230000", "#411600", "#603600", "#805500", "#a57a00", "#cb9f00", "#f2c600", "#ffea48"] },
+      "yellow-soft": { "role": "secondary", "displayName": "Pale Hi-Vis", "canonical": "oklch(96.4% 0.065 97.1)", "tonalRamp": ["#130900", "#2d2300", "#494011", "#685e31", "#8b8153", "#b0a576", "#d6cb9b", "#faefbe"] },
+      "red": { "role": "tertiary", "displayName": "Errata Red", "canonical": "oklch(53.6% 0.191 29.4)", "tonalRamp": ["#3d0000", "#630000", "#8a0000", "#b00d06", "#db4334", "#ff6c59", "#ff937e", "#ffb8a1"] },
+      "red-soft": { "role": "tertiary", "displayName": "Errata Blush", "canonical": "oklch(94.8% 0.020 25.2)", "tonalRamp": ["#130807", "#2d201f", "#4a3c3a", "#695a58", "#8c7c7a", "#b1a09e", "#d7c6c4", "#fceae8"] },
+      "tab-blue": { "role": "tertiary", "displayName": "Tab Blue (template identity)", "canonical": "oklch(50.2% 0.164 259.0)", "tonalRamp": ["#03004e", "#001171", "#003794", "#1858b8", "#3e7de0", "#62a3ff", "#87cbff", "#aaf0ff"] },
+      "tab-amber": { "role": "tertiary", "displayName": "Tab Amber (template identity)", "canonical": "oklch(57.8% 0.136 57.3)", "tonalRamp": ["#2d0000", "#4f0000", "#712300", "#944400", "#bb6818", "#e48d45", "#ffb36d", "#ffd790"] },
+      "tab-violet": { "role": "tertiary", "displayName": "Tab Violet (template identity)", "canonical": "oklch(50.1% 0.161 293.2)", "tonalRamp": ["#180046", "#2d0068", "#47228a", "#6445ae", "#8669d6", "#aa8eff", "#cfb5ff", "#f3d9ff"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Empty-state headline in the drop zone; the drop overlay plate uses the same style at 20px." },
+      "headline": { "displayName": "Wordmark", "purpose": "Top-bar wordmark, condensed caps, second word in yellow." },
+      "title": { "displayName": "Section Head", "purpose": "Rail and stage section heads (Template, Participants, Batch, Sheets)." },
+      "column-label": { "displayName": "Column Head", "purpose": "Sticky table heads in the certificate list." },
+      "body": { "displayName": "Body", "purpose": "Default text, field values, template names, buttons (at 600)." },
+      "body-sm": { "displayName": "Body Small", "purpose": "List rows, counts, caption, status, list box (14px/1.6)." },
+      "label": { "displayName": "Label", "purpose": "Field labels, mini buttons, hints." },
+      "cell-numeral": { "displayName": "Cell Numeral", "purpose": "Last four serial digits inside band cells; tabular." }
+    },
+    "shadows": [
+      { "name": "paper", "value": "0 1px 2px rgba(15,36,25,0.06), 0 10px 24px -14px rgba(15,36,25,0.3)", "purpose": "The preview sheet, a printed page resting on the desk." },
+      { "name": "picked-tab", "value": "0 1px 2px rgba(15,36,25,0.08), 0 6px 16px -8px rgba(15,36,25,0.25)", "purpose": "The template tab marked on." },
+      { "name": "cell-lift", "value": "0 3px 8px -2px rgba(15,36,25,0.35)", "purpose": "Hover on a band cell, with a 1px rise." },
+      { "name": "overlay-plate", "value": "0 12px 32px -8px rgba(0,0,0,0.45)", "purpose": "Yellow drop plate over the dimmed ink scrim while a file is dragged." },
+      { "name": "field-focus", "value": "0 0 0 3px rgba(10,122,63,0.18)", "purpose": "Green glow on a focused field or list box." }
+    ],
+    "motion": [
+      { "name": "state", "value": "0.15s ease", "purpose": "Border, background and shadow changes on buttons and tabs." },
+      { "name": "press", "value": "0.1s ease", "purpose": "1px press-down on button active." },
+      { "name": "cell", "value": "0.12s ease", "purpose": "Band cell lift on hover." },
+      { "name": "spin", "value": "0.7s linear infinite", "purpose": "Busy spinner; all motion is cut under prefers-reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "stack-stage", "value": "1100px" },
+      { "name": "stack-rail", "value": "820px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Rescue-green action; used only for Download PDF and Choose PDF.",
+      "html": "<button class=\"ds-btn ds-btn-primary\" type=\"button\"><svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M10 4v8.5m0 0L6.5 9M10 12.5 13.5 9M4 13.5v1.5c0 .8.7 1.5 1.5 1.5h9c.8 0 1.5-.7 1.5-1.5v-1.5\"/></svg>Download PDF</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: var(--radius, 6px); border: 1px solid transparent; font: 600 15px/1 'Barlow', system-ui, sans-serif; cursor: pointer; white-space: nowrap; transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease; } .ds-btn:active { transform: translateY(1px); } .ds-btn:focus-visible { outline: 3px solid var(--ink, #0f2419); outline-offset: 2px; } .ds-btn-primary { background: var(--green, #0a7a3f); color: #fff; } .ds-btn-primary:hover { background: var(--green-deep, #075a2e); }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "White, hairline-bordered secondary action: Print, Copy rows for register.",
+      "html": "<button class=\"ds-btn-ghost\" type=\"button\"><svg viewBox=\"0 0 20 20\" width=\"18\" height=\"18\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M6 8V3.5h8V8M6 14H4.5C3.7 14 3 13.3 3 12.5v-3C3 8.7 3.7 8 4.5 8h11c.8 0 1.5.7 1.5 1.5v3c0 .8-.7 1.5-1.5 1.5H14M6 11.5h8v5H6z\"/></svg>Print</button>",
+      "css": ".ds-btn-ghost { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: var(--radius, 6px); border: 1px solid var(--line-2, #b9c6bc); background: var(--surface, #fff); color: var(--ink, #0f2419); font: 600 15px/1 'Barlow', system-ui, sans-serif; cursor: pointer; transition: border-color 0.15s ease, transform 0.1s ease; } .ds-btn-ghost:hover { border-color: var(--ink-2, #33473c); } .ds-btn-ghost:active { transform: translateY(1px); } .ds-btn-ghost:focus-visible { outline: 3px solid var(--ink, #0f2419); outline-offset: 2px; } .ds-btn-ghost:disabled { background: #e6ebe6; border-color: transparent; color: #74857a; cursor: not-allowed; }"
+    },
+    {
+      "name": "Mini Tool Button",
+      "kind": "button",
+      "refersTo": "button-mini",
+      "description": "28px square tool for rename, remove, restore and caption stepping.",
+      "html": "<button class=\"ds-mini\" type=\"button\" title=\"Remove\"><svg viewBox=\"0 0 20 20\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5.5 5.5l9 9m0-9-9 9\"/></svg></button>",
+      "css": ".ds-mini { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; padding: 0; border: 1px solid var(--line, #d3dcd4); border-radius: 4px; background: var(--surface, #fff); color: var(--ink-2, #33473c); cursor: pointer; } .ds-mini:hover { border-color: var(--ink-2, #33473c); color: var(--ink, #0f2419); } .ds-mini:focus-visible { outline: 3px solid var(--ink, #0f2419); outline-offset: 2px; }"
+    },
+    {
+      "name": "Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Labelled batch field with green focus glow.",
+      "html": "<label class=\"ds-field\"><span>First serial</span><input placeholder=\"e.g. 2140\" inputmode=\"numeric\" /></label>",
+      "css": ".ds-field { display: grid; gap: 4px; font: 600 13px/1.45 'Barlow', system-ui, sans-serif; color: var(--ink-2, #33473c); } .ds-field input { height: 38px; padding: 0 10px; border: 1px solid var(--line-2, #b9c6bc); border-radius: var(--radius, 6px); background: var(--surface, #fff); font: 500 15px 'Barlow', system-ui, sans-serif; color: var(--ink, #0f2419); font-variant-numeric: tabular-nums; } .ds-field input:focus { outline: none; border-color: var(--green, #0a7a3f); box-shadow: 0 0 0 3px rgba(10,122,63,0.18); }"
+    },
+    {
+      "name": "Top Bar with Livery Strip",
+      "kind": "nav",
+      "refersTo": "top-bar",
+      "description": "Green band, condensed wordmark, privacy line, 12px Battenburg strip below.",
+      "html": "<header class=\"ds-bar\"><div class=\"ds-bar-in\"><span class=\"ds-mark\">ThinkHealth <span>Certificates</span></span><span class=\"ds-private\">Nothing leaves this PC</span></div><div class=\"ds-livery\"></div></header>",
+      "css": ".ds-bar { background: var(--green, #0a7a3f); color: #fff; } .ds-bar-in { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 24px; height: 52px; } .ds-mark { font: 700 21px/1 'Barlow Condensed', 'Barlow', sans-serif; letter-spacing: 0.02em; text-transform: uppercase; } .ds-mark span { color: var(--yellow, #ffd21f); } .ds-private { font: 600 14px 'Barlow', sans-serif; color: #e6f3ea; } .ds-livery { height: 12px; background: conic-gradient(var(--yellow, #ffd21f) 25%, var(--green-deep, #075a2e) 0 50%, var(--yellow, #ffd21f) 0 75%, var(--green-deep, #075a2e) 0) 0 0 / 24px 12px; }"
+    },
+    {
+      "name": "Template Tab",
+      "kind": "card",
+      "refersTo": "template-tab",
+      "description": "Acetate index tab: square top with a 4px hue edge, rounded bottom; ink border when on.",
+      "html": "<div class=\"ds-tab ds-tab-on\" style=\"--hue:#0a7a3f\"><span class=\"ds-tab-thumb\"></span><span class=\"ds-tab-name\">CPR, AED &amp; First Aid</span></div>",
+      "css": ".ds-tab { display: grid; grid-template-columns: 96px 1fr; align-items: center; gap: 12px; padding: 8px; border: 1px solid var(--line, #d3dcd4); border-top: 4px solid var(--hue); border-radius: 0 0 6px 6px; background: var(--surface, #fff); transition: border-color 0.15s ease, box-shadow 0.15s ease; } .ds-tab:hover { border-color: var(--line-2, #b9c6bc); border-top-color: var(--hue); } .ds-tab-on { border-color: var(--ink, #0f2419); border-top-color: var(--hue); box-shadow: 0 1px 2px rgba(15,36,25,0.08), 0 6px 16px -8px rgba(15,36,25,0.25); } .ds-tab-thumb { display: block; width: 96px; aspect-ratio: 1.4153; border-radius: 3px; background: var(--wash, #eef3ef); box-shadow: 0 0 0 1px var(--line, #d3dcd4); } .ds-tab-name { font: 600 15px/1.25 'Barlow', sans-serif; color: var(--ink, #0f2419); }"
+    },
+    {
+      "name": "Sheet Band",
+      "kind": "custom",
+      "refersTo": "band-cell-yellow",
+      "description": "Battenburg band: one column per A4 sheet, top/bottom checks alternating; red for errata, ink outline for selection, hatch for a blank half.",
+      "html": "<div class=\"ds-band\"><div class=\"ds-col\"><span class=\"ds-no\">1</span><button class=\"ds-cell ds-y\">9001</button><button class=\"ds-cell ds-g ds-sel\">9002</button></div><div class=\"ds-col\"><span class=\"ds-no\">2</span><button class=\"ds-cell ds-g\">9003</button><button class=\"ds-cell ds-y\">9004</button></div><div class=\"ds-col\"><span class=\"ds-no\">3</span><button class=\"ds-cell ds-bad\">9005</button><span class=\"ds-cell ds-blank\"></span></div></div>",
+      "css": ".ds-band { display: flex; padding: 2px; } .ds-col { display: grid; grid-template-rows: 16px 30px 30px; width: 72px; } .ds-col + .ds-col .ds-cell { box-shadow: inset 1px 0 0 rgba(255,255,255,0.85); } .ds-no { font: 600 11px/16px 'Barlow', sans-serif; color: var(--muted, #56695e); text-align: center; font-variant-numeric: tabular-nums; } .ds-cell { display: grid; place-items: center; border: 0; padding: 0; cursor: pointer; position: relative; font: 700 12px/1 'Barlow Condensed', sans-serif; letter-spacing: 0.02em; font-variant-numeric: tabular-nums; transition: transform 0.12s ease, box-shadow 0.12s ease; } .ds-y { background: var(--yellow, #ffd21f); color: var(--ink, #0f2419); } .ds-g { background: var(--green, #0a7a3f); color: #fff; } .ds-bad { background: var(--red, #c42b1f); color: #fff; } .ds-blank { cursor: default; background: repeating-linear-gradient(135deg, transparent 0 4px, var(--line, #d3dcd4) 4px 5px); box-shadow: inset 0 0 0 1px var(--line-2, #b9c6bc); } .ds-cell:not(.ds-blank):hover { transform: translateY(-1px); z-index: 1; box-shadow: 0 3px 8px -2px rgba(15,36,25,0.35); } .ds-cell:focus-visible { outline: 3px solid var(--ink, #0f2419); outline-offset: 2px; z-index: 2; } .ds-sel { z-index: 2; outline: 3px solid var(--ink, #0f2419); outline-offset: -1px; }"
+    },
+    {
+      "name": "Fit Tags",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "Neutral, shrink (pale yellow) and errata (red text, no fill) tags under a list row's name.",
+      "html": "<span class=\"ds-tag\">Removed</span> <span class=\"ds-tag ds-tag-shrink\">49% size</span> <span class=\"ds-tag ds-tag-bad\">Can't print</span>",
+      "css": ".ds-tag { display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px; border-radius: 3px; font: 600 12px/1.45 'Barlow', sans-serif; background: var(--wash, #eef3ef); color: var(--ink-2, #33473c); } .ds-tag-shrink { background: var(--yellow-soft, #fff4c2); color: #5c4700; } .ds-tag-bad { background: transparent; color: var(--red, #c42b1f); padding-left: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Ambulance Livery",
+    "overview": "The tool wears the side of a rescue vehicle: a white body, a solid rescue-green top bar, and below it a reflective Battenburg strip of high-visibility yellow and deep green checks. The same check pattern becomes the working instrument. The band of sheets is a Battenburg strip too: one column per A4 sheet, the top and bottom blocks alternating yellow and green, so the whole batch reads as livery before anything prints.\n\nIt is a dense operator tool for a repeated office chore. Surfaces are flat and white, divided by green-grey hairlines. Colour is spent where it carries information: the checks show the batch, red shows a certificate that can't print, and one ink outline shows what is selected. The type is Barlow throughout, with Barlow Condensed in caps for the few pieces of livery lettering: the wordmark, section heads, column heads and the band's serials.\n\nThe printed certificate is a separate world. Its colours (dark teal #0E3F51, light blue #0099D3) belong to the company certificate design (kept private), not to the tool. The tool frames that design like a proof sheet and never borrows its colours.",
+    "keyCharacteristics": [
+      "White ground, hairline green-grey dividers, flat surfaces.",
+      "Yellow and green used only as paired checks: the top bar's livery strip and the band of sheets.",
+      "Red is only for failure: a certificate that can't print, an error message, and the confirm step before removing a template.",
+      "Selection is an ink outline. There is no selection tint.",
+      "Every number uses tabular figures.",
+      "Barlow Condensed caps are limited to livery lettering. They are never used for running text."
+    ],
+    "rules": [
+      { "name": "The Paired Checks Rule", "body": "Yellow and green appear together as alternating checks: in the livery strip, and in the band, where the colour alternates by sheet and slot. Never use yellow alone as a fill for a generic accent.", "section": "colors" },
+      { "name": "The Errata Red Rule", "body": "Red means something will fail or be destroyed. Use it for a certificate that can't print, an error, or the confirm step of a removal, and for nothing else. A shrunk name is not an error, so its marker is an ink notch and a pale yellow tag.", "section": "colors" },
+      { "name": "The Print Colours Stay On Paper Rule", "body": "The certificate design's teal and blue are never used as tool UI tokens.", "section": "colors" },
+      { "name": "The Register Numerals Rule", "body": "Every number (serials, sheet numbers, counts, dates, the caption's position) uses tabular figures.", "section": "typography" },
+      { "name": "The Livery Lettering Rule", "body": "Use condensed caps only for marks and headings of three words or fewer. Never use them for sentences, and never for a label above a heading.", "section": "typography" },
+      { "name": "The Paper Rule", "body": "Only the certificate sheet rests at elevation. Other panels stay flat; a lift appears only for a picked tab or a hovered cell.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do put tokens on `:root` and reference them by `var(--…)`. Tool UI colours come from the livery palette above.",
+      "Do keep yellow and green paired as checks (yellow #ffd21f always with ink text, green #0a7a3f with white).",
+      "Do mark selection with the ink outline (3px on band cells, 2px inset on list rows, an ink border on the \"on\" tab), never with a tint.",
+      "Do use tabular figures for every number.",
+      "Do show the certificate at its true aspect ratio (595.72 / 420.91), framed as a proof with hairline crop marks.",
+      "Do use the one drawn icon set (20×20, 1.75 stroke) for every icon.",
+      "Do refer to the company certificate design (kept private) only through what the tool renders. Keep its teal (#0E3F51) and blue (#0099D3) on the certificate."
+    ],
+    "donts": [
+      "Don't use red for anything except failure, error or a destructive confirm. A shrunk name uses the ink notch and the pale yellow tag.",
+      "Don't use a tinted background to mark selection, or a second selection colour.",
+      "Don't set sentences, or labels above headings, in Barlow Condensed caps.",
+      "Don't add shadows to flat panels. Only the sheet rests at elevation.",
+      "Don't round band cells or the top edge of a template tab.",
+      "Don't use the certificate's teal or blue in the tool UI."
+    ]
+  }
+}
